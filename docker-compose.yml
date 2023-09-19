@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: myprojects
+      MYSQL_USER: mn_root
+      MYSQL_PASSWORD: mn_toor
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - NODE_VERSION=16
+      - SYMFONY_ENV=dev
