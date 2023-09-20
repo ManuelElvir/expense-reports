@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=ExpenseReportTypeRepository::class)
  * @UniqueEntity(fields={"name"}, message="This type already exists")
+ * @ORM\HasLifecycleCallbacks
  */
 class ExpenseReportType
 {
@@ -39,5 +40,22 @@ class ExpenseReportType
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->name = strtolower($this->name);
+    }
+
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->name = strtolower($this->name);
     }
 }

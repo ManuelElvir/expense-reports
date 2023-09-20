@@ -5,7 +5,7 @@ namespace App\Tests\Repository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-final class UserRepositoryTest extends KernelTestCase
+final class UserTest extends KernelTestCase
 {
 
     public function setUp(): void

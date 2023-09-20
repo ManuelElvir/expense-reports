@@ -51,6 +51,12 @@ class ExpenseReport
      * @Assert\NotNull()
      */
     private User $owner;
+    
+    /**
+     * @ORM\Column(type="datetime", options={"default"="CURRENT_TIMESTAMP"})
+     */
+    private DateTime $registration_date;
+
 
     public function getId(): ?int
     {
@@ -113,6 +119,18 @@ class ExpenseReport
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getRegistrationDate(): ?\DateTimeInterface
+    {
+        return $this->registration_date;
+    }
+
+    public function setRegistrationDate(\DateTimeInterface $registration_date): self
+    {
+        $this->registration_date = $registration_date;
 
         return $this;
     }

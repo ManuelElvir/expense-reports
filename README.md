@@ -49,11 +49,19 @@ cp .env.example .env
 ## Configuration 
 (Vous pouvez passer cette étape si vous utilisez doker)
 ```bash
-# Crééz la base de donnée
-php bin/console doctrine:database:create
-
-# Mettez à jour l'url vers la base de donnée
+# Mettez à jour l'url vers la base de donnée (optionnel si vous utilisez docker)
 DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8.0.32&charset=utf8mb4"
+
+# Crééz la base de donnée
+docker-compose exec web bash && php bin/console d:d:c
+
+# Exécutez les migrations pour mettre à jour la base de donnée
+docker-compose exec web bash && php bin/console d:m:m
+
+# Lancer les fixtures pour ne pas débuter avec une base de donnée vide
+docker-compose exec web bash && php bin/console d:f:l
+
+# Pour les tests, refaire ces trois dernières actions avec --env=test
 ```	
 
 ## Use
@@ -68,7 +76,7 @@ docker-compose up
 php -S localhost:8000 -t public
 
 # Créer un utilisateur
-php bin/console app:create-user <username> <password>
+php bin/console app:create-user <email> <password>
 
 # consultez la documentation sur /docs pour savoir comment interagir avec le serveur
 ```	

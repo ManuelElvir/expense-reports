@@ -47,22 +47,21 @@ class ExpenseReportRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return ExpenseReport[] Returns an array of ExpenseReport objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return ExpenseReport[] Returns an array of ExpenseReport objects
+     */
+    public function findByUser($userId, $limit = 20, $offset = 0)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('e.owner = :userId')
+            ->setParameter('userId', $userId)
             ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?ExpenseReport

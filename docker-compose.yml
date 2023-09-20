@@ -21,3 +21,14 @@ services:
     environment:
       - NODE_VERSION=16
       - SYMFONY_ENV=dev
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: toor
+    ports:
+      - '8080:80'
+    depends_on:
+      - db

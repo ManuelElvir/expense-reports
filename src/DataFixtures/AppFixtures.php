@@ -58,7 +58,8 @@ class AppFixtures extends Fixture
                 ->setAmount(rand(40, 120))
                 ->setReportType($erTypes[rand(0, 3)])
                 ->setCompany($companiesE[rand(0, 1)])
-                ->setOwner($user);
+                ->setOwner($user)
+                ->setRegistrationDate(new \DateTime);
             $manager->persist($expenseReport);
         }
 

@@ -5,7 +5,7 @@ namespace App\Tests\Repository;
 use App\Repository\ExpenseReportTypeRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-final class ExpenseReportTypeRepositoryTest extends KernelTestCase
+final class ExpenseReportTypeTest extends KernelTestCase
 {
 
     public function setUp(): void

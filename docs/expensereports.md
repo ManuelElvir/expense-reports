@@ -4,20 +4,25 @@
 
 Welcome to the documentation for the expense management API. This API allows you to manage the expense reports of a user with ID #1.
 
+## Remarques
+
+-  All these endpoint are protected, you must have a jwt token of connexion to continue on this part. If you don't have it yet  [Start by login](./auth.md).
+
 ## Endpoints
 
 ### Get all expense reports
 
 Retrieves a list of all expense reports for user #1.
 
-- **URL**: `/expense-reports`
+- **URL**: `/api/expense-reports?page=1&limit=20`
+- **Header**: Authorization:  Bearer your-jwt-token
 - **HTTP Method**: GET
 - **Responses**: List of expense reports in JSON format.
 
 #### Sample call
 
 ```http
-GET /expense-reports
+GET /api/expense-reports?page=1&limit=20
 ```
 #### Sample response
 - **Status code**: `200`
@@ -37,7 +42,8 @@ GET /expense-reports
 
 Retrieves a specific expense report by its identifier.
 
-- **URL**: /expense-reports/{id}
+- **URL**: /api/expense-reports/{id}
+- **Header**: Authorization:  Bearer your-jwt-token
 - **HTTP Method**: GET
 - **Parameter**: id (expense claim identifier)
 - **Response**: Expense claim details in JSON format.
@@ -45,7 +51,7 @@ Retrieves a specific expense report by its identifier.
 #### Sample call
 
 ```http
-GET /expense-reports/1
+GET /api/expense-reports/1
 ```
 
 #### Sample response
@@ -64,7 +70,8 @@ GET /expense-reports/1
 
 Ajoute une nouvelle note de frais pour l'utilisateur #1.
 
-- **URL**: /expense-reports
+- **URL**: /api/expense-reports
+- **Header**: Authorization:  Bearer your-jwt-token
 - **HTTP Method**: POST
 - **Request body**: Expense report data in JSON format (date, amount, type, etc.).
 - **Response**: Details of expense report added in JSON format.
@@ -72,7 +79,7 @@ Ajoute une nouvelle note de frais pour l'utilisateur #1.
 #### Sample call
 
 ```http
-POST /expense-reports
+POST /api/expense-reports
 Content-Type: application/json
 {
     "date": "2023-09-09",
@@ -98,7 +105,8 @@ Content-Type: application/json
 
 Modify an existing expense report by its identifier.
 
-- **URL**: `/expense-reports`
+- **URL**: `/api/expense-reports`
+- **Header**: Authorization:  Bearer your-jwt-token
 - **HTTP Method**: PUT
 - **Parameter**: id (expense claim identifier)
 - **Request body**: Expense report data in JSON format (date, amount, type, etc.).
@@ -131,7 +139,8 @@ Content-Type: application/json
 
 Delete an existing expense report by its identifier.
 
-- **URL**: `/expense-reports`
+- **URL**: `/api/expense-reports`
+- **Header**: Authorization:  Bearer your-jwt-token
 - **HTTP Method**: DELETE
 - **Parameter**: id (expense claim identifier)
 - **Response**: No content.
@@ -146,7 +155,7 @@ DELETE /api/notes-de-frais/1
 
 ## Remarques
 
--  Authentication and rights management are not implemented in this version of the API. Routes are only available to user #1.
+-  Authentication and rights management are implemented. Se the [authentification Doc](./auth.md).
 -  Please do not hesitate to contact the developer if you have any questions or require further assistance.
 
 #### Sample Error response
