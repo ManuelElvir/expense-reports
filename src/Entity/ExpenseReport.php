@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\ExpenseReportRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ExpenseReportRepository::class)
@@ -15,35 +17,40 @@ class ExpenseReport
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $report_date;
+    private DateTime $report_date;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Type(type="float")
+     * @Assert\GreaterThan(0)
      */
-    private $amount;
+    private float $amount;
 
     /**
      * @ORM\ManyToOne(targetEntity=ExpenseReportType::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
-    private $report_type;
+    private ExpenseReportType $report_type;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="expenseReports")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
-    private $company;
+    private Company $company;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="expenseReports")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
-    private $owner;
+    private User $owner;
 
     public function getId(): ?int
     {

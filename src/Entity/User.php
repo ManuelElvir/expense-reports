@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -22,42 +24,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email()
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $first_name;
+    private string $first_name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $last_name;
+    private string $last_name;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $birth_date;
+    private DateTime $birth_date;
 
     /**
      * @ORM\OneToMany(mappedBy="owner", targetEntity=ExpenseReport::class)
      */
-    private $expenseReports;
+    private Collection $expenseReports;
 
     public function __construct()
     {

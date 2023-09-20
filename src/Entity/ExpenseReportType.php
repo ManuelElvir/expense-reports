@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\ExpenseReportTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ExpenseReportTypeRepository::class)
+ * @UniqueEntity(fields={"name"}, message="This type already exists")
  */
 class ExpenseReportType
 {
