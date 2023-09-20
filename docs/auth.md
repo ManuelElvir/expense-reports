@@ -2,6 +2,23 @@
 
 Cette URL est utilisée pour l'authentification des utilisateurs et la génération d'un token JWT (JSON Web Token) après une connexion réussie.
 
+## Configuration
+
+Vous devez créer deux clés RSA pour utiliser cette fonctionnalité d'authentification
+
+
+```bash
+# Créez la clé publique placez vous à la racide du projet et exécutez la commande
+openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa _keygen_bits:4096
+
+
+# Crééz la clé privée 
+openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
+
+# conserver la phrase secrete dans le fichier .env.local
+JWT_PASSPHRASE=votre_phrase_secrete_ici
+```	
+
 ## Endpoint
 
 - **URL** : `/api/login_check`
